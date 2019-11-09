@@ -1,4 +1,4 @@
 export default {
-  API_SERVER: "http://localhost:3001/api",
-  API_SERVER_URL: "http://localhost:3001"
+  API_SERVER: "https://book.sachtimmach.com/api",
+  API_SERVER_URL: "https://book.sachtimmach.com"
 };
