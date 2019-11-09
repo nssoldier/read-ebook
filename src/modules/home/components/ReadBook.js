@@ -70,15 +70,12 @@ class ReadBook extends Component {
         ) : (
           <ReaderContainer fullscreen={fullscreen}>
             <ReactReader
-              url={this.props.url}
+              url={`${this.props.url}`}
               locationChanged={this.onLocationChanged}
-              title={this.props.title}
               location={location}
               getRendition={this.getRendition}
               styles={{
                 ...ReactReaderStyle,
-                // next: { display: "none" },
-                // prev: { display: "none" },
                 reader: {
                   position: "absolute",
                   width: "100%",
