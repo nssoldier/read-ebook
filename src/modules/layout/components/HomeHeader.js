@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Layout, Icon } from "antd";
-import { css } from "emotion";
-import { Link } from "react-router-dom";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Layout, Icon } from 'antd';
+import { css } from 'emotion';
+import { Link } from 'react-router-dom';
 
 const propTypes = {
   authenticated: PropTypes.bool.isRequired
@@ -74,8 +74,16 @@ const Header = ({ authenticated, logout }) => {
   return (
     <Layout.Header className={styles.header}>
       <Link to="/">
-        <div style={{ width: "15%" }}>
-          <img src="/logo.png" alt="" width="50%" />
+        <div style={{ width: '15%' }}>
+          <img
+            src="/logo.png"
+            alt=""
+            width="50%"
+            style={{
+              backgroundColor: 'white',
+              borderRadius: '50% 50%'
+            }}
+          />
         </div>
       </Link>
 
@@ -87,11 +95,10 @@ const Header = ({ authenticated, logout }) => {
             </Link>
             <span
               style={{
-                color: "#fff",
-                paddingLeft: "10px",
-                paddingRight: "10px"
-              }}
-            >
+                color: '#fff',
+                paddingLeft: '10px',
+                paddingRight: '10px'
+              }}>
               |
             </span>
             <Link
@@ -99,8 +106,7 @@ const Header = ({ authenticated, logout }) => {
               onClick={logout}
               icon="logout"
               to="/login"
-              type="link"
-            >
+              type="link">
               Logout
             </Link>
           </>
@@ -110,17 +116,15 @@ const Header = ({ authenticated, logout }) => {
               className={styles.button}
               icon="login"
               to="/login"
-              type="link"
-            >
+              type="link">
               Login
             </Link>
-            <span style={{ color: "#fff", padding: "10px" }}>or</span>
+            <span style={{ color: '#fff', padding: '10px' }}>or</span>
             <Link
               className={styles.button}
               icon="user-add"
               to="/register"
-              type="link"
-            >
+              type="link">
               Register
             </Link>
           </div>
