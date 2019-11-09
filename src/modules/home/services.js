@@ -18,7 +18,10 @@ export const getBookListClaimed = async () => {
     `
   });
 
-  return res.data.getBookListClaimed;
+  return res.data.getBookListClaimed.map(book => ({
+    ...book,
+    img: `${config.API_SERVER_URL}/${book.img}`
+  }));
 };
 
 export const getBook = async bookId => {
