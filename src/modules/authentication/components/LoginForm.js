@@ -99,7 +99,7 @@ const LoginForm = ({
           Đăng nhập
         </h2>
       </div>
-      <Form.Item>
+      <Form.Item label="Email">
         {getFieldDecorator("email", {
           rules: [{ required: true, message: "Thông tin bắt buộc" }]
         })(
@@ -110,7 +110,7 @@ const LoginForm = ({
           />
         )}
       </Form.Item>
-      <Form.Item>
+      <Form.Item label="Mật khẩu">
         {getFieldDecorator("password", {
           rules: [{ required: true, message: "Thông tin bắt buộc" }]
         })(
@@ -137,6 +137,7 @@ const LoginForm = ({
         <Button
           onClick={() => navigateToRegister()}
           className={cx(styles.loginFormButton, styles.formField)}
+          type="link"
         >
           Đăng ký
         </Button>

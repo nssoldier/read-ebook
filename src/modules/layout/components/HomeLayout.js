@@ -28,18 +28,18 @@ const styles = {
     background-color: white;
     display: flex;
 
-    @media screen and (max-width: 480px) {
-      padding: 20px 50px;
-    }
-    @media screen and (min-width: 768px) {
-      padding: 35px 75px;
-    }
-    @media screen and (min-width: 992px) {
-      padding: 45px 95px;
-    }
-    @media screen and (min-width: 1200px) {
-      padding: 50px 150px;
-    }
+    // @media screen and (max-width: 480px) {
+    //   // padding: 20px 50px;
+    // }
+    // @media screen and (min-width: 768px) {
+    //   padding: 35px 75px;
+    // }
+    // @media screen and (min-width: 992px) {
+    //   padding: 45px 95px;
+    // }
+    // @media screen and (min-width: 1200px) {
+    //   padding: 50px 150px;
+    // }
   `
 };
 

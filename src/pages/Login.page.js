@@ -5,6 +5,9 @@ import { css } from "emotion";
 const styles = {
   container: css`
     width: 400px;
+    @media screen and (max-width: 480px) {
+      width: 300px;
+    }
     display: flex;
     margin: auto;
     border: 1px solid #f0f0f0;

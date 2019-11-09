@@ -21,11 +21,17 @@ const ReadBookContainer = props => {
   }, [getBook]);
 
   const book = useSelector(state => state.book.book);
+  const loadingBook = useSelector(state => state.book.loadingBook);
 
   console.log(book);
 
   return book.linkUrl ? (
-    <ReadBook {...props} url={book.linkUrl} title={book.title} />
+    <ReadBook
+      {...props}
+      url={book.linkUrl}
+      loadingBook={loadingBook}
+      title={book.title}
+    />
   ) : null;
 };
 

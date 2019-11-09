@@ -6,14 +6,15 @@ export const Container = styled.div`
   width: 100%;
   height: 100%;
   min-height: 100vh;
-  background: linear-gradient(to bottom, #f2f2f2 0%, #333 100%);
 `;
 export const ReaderContainer = styled.div`
   font-size: 24px;
   position: absolute;
-  top: ${props => (props.fullscreen ? 0 : 135)}px;
-  left: ${props => (props.fullscreen ? 0 : 1)}rem;
-  right: ${props => (props.fullscreen ? 0 : 1)}rem;
+  padding: 0px;
+  margin: 0px;
+  top: ${props => (props.fullscreen ? 0 : 1)}rem;
+  left: ${props => (props.fullscreen ? 0 : 0)}px;
+  right: ${props => (props.fullscreen ? 0 : 0)}px;
   bottom: ${props => (props.fullscreen ? 0 : 1)}rem;
   transition: all 0.6s ease;
   ${props => !props.fullscreen && "0 0 5px rgba(0,0,0,.3);"};

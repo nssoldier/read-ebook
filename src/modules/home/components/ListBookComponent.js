@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { css } from "emotion";
 import ShowMoreText from "react-show-more-text";
-import { Button, Input, Form, Card } from "antd";
+import { Button, Input, Form, Card, Divider } from "antd";
 
 const styles = {
   desc: css`
@@ -28,7 +28,7 @@ const styles = {
     align-content: center;
   `,
   container: css`
-    margin-top: 35px;
+    margin-top: 60px;
   `,
   button: css`
     display: flex;
@@ -46,7 +46,7 @@ const ListBookComponent = ({
 }) => {
   const [code, setCode] = useState("");
   return (
-    <div style={{ width: "1200px", display: "flex-box" }}>
+    <div style={{ width: "90%", display: "flex-box", margin: "5%" }}>
       {loadingBooks && (
         <Card
           style={{ width: "100%", margin: "15px" }}
@@ -56,7 +56,7 @@ const ListBookComponent = ({
       {books.map((book, i) => (
         <Card
           key={i}
-          style={{ width: "100%", margin: "15px" }}
+          style={{ width: "100%", marginBottom: "15px" }}
           title={book.title}
           extra={
             <Button onClick={() => readBook(book.id)} type="primary">
@@ -76,8 +76,9 @@ const ListBookComponent = ({
           </div>
         </Card>
       ))}
+      <Divider />
       <div className={styles.container}>
-        <Card title="Nhận thêm sách" style={{ width: "100%", margin: "15px" }}>
+        <Card title="Nhận thêm sách" style={{ width: "100%" }}>
           <Form style={{ margin: "15px 0 15px 0" }}>
             <Form.Item
               label="Mã sách"
@@ -95,7 +96,7 @@ const ListBookComponent = ({
                 style={{ width: "70%" }}
                 placeholder="Nhập mã sách"
                 value={code}
-                onChange={e => setCode(e.target.value.toUpperCase())}
+                onChange={e => setCode(e.target.value)}
               />
               <div
                 style={{ color: "red", display: claimErr ? "block" : "none" }}

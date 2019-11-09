@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { ReactReader } from "react-reader";
+import { ReactReader, ReactReaderStyle } from "react-reader";
 import { ReaderContainer } from "./Components";
+import { css } from "emotion";
+import { Spin } from "antd";
 
 class ReadBook extends Component {
   constructor(props) {
@@ -52,20 +54,49 @@ class ReadBook extends Component {
   };
 
   render() {
+    const styles = {
+      container: css`
+        position: relative;
+        height: 100vh;
+        width: 100%;
+        padding: 0px;
+      `
+    };
     const { fullscreen, location } = this.state;
     return (
-      // <div className={styles.container}>
-      <ReaderContainer fullscreen={fullscreen}>
-        <ReactReader
-          url={this.props.url}
-          locationChanged={this.onLocationChanged}
-          title={this.props.title}
-          location={location}
-          getRendition={this.getRendition}
-          epubOptions={{ flow: "scrolled-doc" }}
-        />
-      </ReaderContainer>
-      // </div>
+      <div className={styles.container}>
+        {this.props.loadingBook ? (
+          <Spin size="large"></Spin>
+        ) : (
+          <ReaderContainer fullscreen={fullscreen}>
+            <ReactReader
+              url={this.props.url}
+              locationChanged={this.onLocationChanged}
+              title={this.props.title}
+              location={location}
+              getRendition={this.getRendition}
+              styles={{
+                ...ReactReaderStyle,
+                // next: { display: "none" },
+                // prev: { display: "none" },
+                reader: {
+                  position: "absolute",
+                  width: "100%",
+                  top: 50,
+                  left: 1,
+                  bottom: 20,
+                  right: 1
+                }
+              }}
+              epubOptions={{
+                fontSize: "18px",
+                flow: "scrolled-continuous",
+                width: "100%"
+              }}
+            />
+          </ReaderContainer>
+        )}
+      </div>
     );
   }
 }

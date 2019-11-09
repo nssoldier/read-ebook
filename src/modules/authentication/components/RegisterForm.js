@@ -103,7 +103,7 @@ const RegisterForm = ({
           Đăng ký
         </h2>
       </div>
-      <Form.Item>
+      <Form.Item label="Email">
         {getFieldDecorator("email", {
           rules: [{ required: true, message: "Thông tin bắt buộc" }]
         })(
@@ -114,7 +114,7 @@ const RegisterForm = ({
           />
         )}
       </Form.Item>
-      <Form.Item>
+      <Form.Item label="User name">
         {getFieldDecorator("username", {
           rules: [{ required: true, message: "Thông tin bắt buộc" }]
         })(
@@ -125,7 +125,7 @@ const RegisterForm = ({
           />
         )}
       </Form.Item>
-      <Form.Item>
+      <Form.Item label="Mật khẩu">
         {getFieldDecorator("password", {
           rules: [{ required: true, message: "Thông tin bắt buộc" }]
         })(
@@ -137,7 +137,7 @@ const RegisterForm = ({
           />
         )}
       </Form.Item>
-      <Form.Item>
+      <Form.Item label="Nhập lại mật khẩu">
         {getFieldDecorator("rePassword", {
           rules: [{ required: true, message: "Thông tin bắt buộc" }]
         })(
@@ -165,7 +165,10 @@ const RegisterForm = ({
         >
           Đăng ký
         </Button>
-        <Button className={cx(styles.cancelButton, styles.formField)}>
+        <Button
+          className={cx(styles.cancelButton, styles.formField)}
+          type="link"
+        >
           <a onClick={() => navigateToLogin()}>Đăng nhập</a>
         </Button>
       </Form.Item>

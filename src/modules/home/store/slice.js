@@ -4,6 +4,7 @@ const initialState = {
   listBook: [],
   book: {},
   loadingBooks: false,
+  loadingBook: false,
   claiming: false,
   claimErr: false
 };
@@ -30,17 +31,21 @@ const book = createSlice({
     getBookStart: state => ({
       ...state,
       claiming: true,
-      claimErr: false
+      claimErr: false,
+      book: {},
+      loadingBook: true
     }),
     getBookSuccess: (state, { payload }) => ({
       ...state,
       book: payload.result,
-      claiming: false
+      claiming: false,
+      loadingBook: false
     }),
     getBookFail: state => ({
       ...state,
       claiming: false,
-      claimErr: true
+      claimErr: true,
+      loadingBook: false
     }),
     getBookListClaimedStart: state => ({
       ...state,
