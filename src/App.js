@@ -1,31 +1,33 @@
-import React, { useState } from "react";
-import { ReactReader, EpubView } from "react-reader";
+import React, { useEffect } from "react";
+import { Switch, Route, withRouter } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import routes from "./routes";
+import { actions } from "./modules/authentication/store";
 
-const App = () => {
-  const [url, setUrl] = useState(
-    "/Users/mac/Desktop/projects/read-ebook/src/Chuong-8.epub"
+const App = ({ history, location }) => {
+  const authenticated = useSelector(
+    state => state.authentication.authenticated
   );
+  const authenticating = useSelector(
+    state => state.authentication.authenticating
+  );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    (async () => {
+      if (!authenticated && !authenticating) {
+        await dispatch(actions.checkToken({ history, location }));
+      }
+    })();
+  }, [authenticated, authenticating, dispatch, history, location]);
+
   return (
-    <>
-      <div style={{ /*position: "relative",*/ height: "100%" }}>
-        {" "}
-        <ReactReader
-          url={url}
-          title={"Alice in wonderland"}
-          location={"epubcfi(/6/2[cover]!/6)"}
-          locationChanged={epubcifi => console.log(epubcifi)}
-        />
-      </div>{" "}
-      <div style={{ /*position: "relative",*/ height: "100%" }}>
-        <EpubView
-          url={url}
-          location={"epubcfi(/6/2[cover]!/6)"}
-          locationChanged={epubcifi => console.log(epubcifi)}
-          tocChanged={toc => console.log(toc)}
-        />
-      </div>
-    </>
+    <Switch>
+      {routes.map(route => (
+        <Route key={route.path} {...route} />
+      ))}
+    </Switch>
   );
 };
 
-export default App;
+export default withRouter(App);
