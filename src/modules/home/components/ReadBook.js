@@ -43,14 +43,21 @@ class ReadBook extends Component {
       if (!frames || !frames.length) {
         return false;
       }
-      const id = frames[0].id;
-      const iFrame = document.getElementById(id);
+      const iFrame = frames[0];
       const iDoc = iFrame.contentDocument;
       const style = iDoc.getElementById("epubjs-inserted-css");
       if (!style) {
         return false;
       }
       style.remove();
+      window.iDoc = iDoc;
+      const newStyle = iDoc.createElement("style");
+      newStyle.innerHTML = `
+        .image-wrap {
+          text-align: center;
+        }
+      `;
+      iDoc.body.append(newStyle);
       return true;
     };
 
