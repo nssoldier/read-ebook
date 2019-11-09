@@ -23,8 +23,6 @@ const ReadBookContainer = props => {
   const book = useSelector(state => state.book.book);
   const loadingBook = useSelector(state => state.book.loadingBook);
 
-  console.log(book);
-
   return book.linkUrl ? (
     <ReadBook
       {...props}

@@ -35,22 +35,35 @@ class ReadBook extends Component {
     });
   };
 
-  onToggleFontSize = () => {
-    const nextState = !this.state.largeText;
-    this.setState(
-      {
-        largeText: nextState
-      },
-      () => {
-        this.rendition.themes.fontSize(nextState ? "140%" : "100%");
-      }
-    );
-  };
+  onToggleFontSize = () => {};
 
   getRendition = rendition => {
-    const { largeText } = this.state;
-    this.rendition = rendition;
-    rendition.themes.fontSize(largeText ? "140%" : "100%");
+    const check = () => {
+      const frames = document.getElementsByTagName("iframe");
+      if (!frames || !frames.length) {
+        return false;
+      }
+      const id = frames[0].id;
+      const iFrame = document.getElementById(id);
+      const iDoc = iFrame.contentDocument;
+      const style = iDoc.getElementById("epubjs-inserted-css");
+      if (!style) {
+        return false;
+      }
+      style.remove();
+      return true;
+    };
+
+    const loop = () => {
+      const result = check();
+      if (!result) {
+        setTimeout(loop, 100);
+        console.log("check failed, pending another check after 100ms");
+      } else {
+        console.log("check ok!!");
+      }
+    };
+    loop();
   };
 
   render() {
@@ -77,6 +90,7 @@ class ReadBook extends Component {
               styles={{
                 ...ReactReaderStyle,
                 reader: {
+                  ...ReactReaderStyle.reader,
                   position: "absolute",
                   width: "100%",
                   top: 50,
@@ -88,7 +102,10 @@ class ReadBook extends Component {
               epubOptions={{
                 fontSize: "18px",
                 flow: "scrolled-continuous",
-                width: "100%"
+                width: "100%",
+                layout: {
+                  columnWidth: 1000
+                }
               }}
             />
           </ReaderContainer>
