@@ -4,6 +4,38 @@ import { ReaderContainer } from "./Components";
 import { css } from "emotion";
 import { Spin } from "antd";
 
+const check = () => {
+  const frames = document.getElementsByTagName("iframe");
+  if (!frames || !frames.length) {
+    return false;
+  }
+  const iFrame = frames[0];
+  const iDoc = iFrame.contentDocument;
+  const style = iDoc.getElementById("epubjs-inserted-css");
+  if (!style) {
+    return false;
+  }
+  style.remove();
+  window.iDoc = iDoc;
+  const newStyle = iDoc.createElement("style");
+  newStyle.innerHTML = `
+    .image-wrap {
+      text-align: center;
+    }
+  `;
+  iDoc.body.append(newStyle);
+  return true;
+};
+
+const loop = () => {
+  const result = check();
+  if (!result) {
+    setTimeout(loop, 100);
+    console.log("check failed, pending another check after 100ms");
+  } else {
+    console.log("check ok!!");
+  }
+};
 class ReadBook extends Component {
   constructor(props) {
     super(props);
@@ -33,43 +65,12 @@ class ReadBook extends Component {
     this.setState({
       location
     });
+    loop();
   };
 
   onToggleFontSize = () => {};
 
   getRendition = rendition => {
-    const check = () => {
-      const frames = document.getElementsByTagName("iframe");
-      if (!frames || !frames.length) {
-        return false;
-      }
-      const iFrame = frames[0];
-      const iDoc = iFrame.contentDocument;
-      const style = iDoc.getElementById("epubjs-inserted-css");
-      if (!style) {
-        return false;
-      }
-      style.remove();
-      window.iDoc = iDoc;
-      const newStyle = iDoc.createElement("style");
-      newStyle.innerHTML = `
-        .image-wrap {
-          text-align: center;
-        }
-      `;
-      iDoc.body.append(newStyle);
-      return true;
-    };
-
-    const loop = () => {
-      const result = check();
-      if (!result) {
-        setTimeout(loop, 100);
-        console.log("check failed, pending another check after 100ms");
-      } else {
-        console.log("check ok!!");
-      }
-    };
     loop();
   };
 
