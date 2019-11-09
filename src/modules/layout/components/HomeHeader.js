@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Layout, Icon } from "antd";
+import { Layout } from "antd";
 import { css } from "emotion";
 import { Link } from "react-router-dom";
 
@@ -96,18 +96,6 @@ const Header = ({ authenticated, logout }) => {
       <div className={styles.logoutContainer}>
         {authenticated ? (
           <>
-            <Link icon="logout" to="/profile/view" type="link" title="Profile">
-              <Icon type="user" />
-            </Link>
-            <span
-              style={{
-                color: "#fff",
-                paddingLeft: "10px",
-                paddingRight: "10px"
-              }}
-            >
-              |
-            </span>
             <Link
               className={styles.button}
               onClick={logout}

@@ -49,7 +49,12 @@ const book = createSlice({
     }),
     getBookListClaimedStart: state => ({
       ...state,
-      loadingBooks: true
+      loadingBooks: true,
+      listBook: [],
+      book: {},
+      loadingBook: false,
+      claiming: false,
+      claimErr: false
     }),
     getBookListClaimedSuccess: (state, { payload }) => ({
       ...state,

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { css } from "emotion";
 import ShowMoreText from "react-show-more-text";
-import { Button, Input, Form, Card, Divider } from "antd";
+import { Button, Input, Form, Card } from "antd";
 
 const styles = {
   desc: css`
@@ -47,39 +47,48 @@ const ListBookComponent = ({
   const [code, setCode] = useState("");
   return (
     <div style={{ width: "90%", display: "flex-box", margin: "5%" }}>
-      {loadingBooks && (
+      {loadingBooks ? (
         <Card
           style={{ width: "100%", margin: "15px" }}
           loading={loadingBooks}
         ></Card>
+      ) : books.length ? (
+        books.map((book, i) => (
+          <Card
+            key={i}
+            style={{ width: "100%", marginBottom: "15px" }}
+            title={book.title}
+            extra={
+              <Button onClick={() => readBook(book.id)} type="primary">
+                Đọc sách
+              </Button>
+            }
+          >
+            <div className={styles.desc}>
+              <div style={{ width: "30%" }}>
+                <img width="100%" alt="" src={book.img} />
+              </div>
+              <div style={{ width: "65%" }}>
+                <ShowMoreText more="Xem thêm" less="Ẩn bớt" lines={10}>
+                  {book.description}
+                </ShowMoreText>
+              </div>
+            </div>
+          </Card>
+        ))
+      ) : (
+        <h3>Chưa có sách nhập mã vào ô bên dưới để nhận sách!</h3>
       )}
-      {books.map((book, i) => (
-        <Card
-          key={i}
-          style={{ width: "100%", marginBottom: "15px" }}
-          title={book.title}
-          extra={
-            <Button onClick={() => readBook(book.id)} type="primary">
-              Đọc sách
-            </Button>
-          }
-        >
-          <div className={styles.desc}>
-            <div style={{ width: "30%" }}>
-              <img width="100%" alt="" src={book.img} />
-            </div>
-            <div style={{ width: "65%" }}>
-              <ShowMoreText more="Xem thêm" less="Ẩn bớt" lines={10}>
-                {book.description}
-              </ShowMoreText>
-            </div>
-          </div>
-        </Card>
-      ))}
-      <Divider />
+
       <div className={styles.container}>
         <Card title="Nhận thêm sách" style={{ width: "100%" }}>
-          <Form style={{ margin: "15px 0 15px 0" }}>
+          <Form
+            style={{ margin: "15px 0 15px 0" }}
+            onSubmit={e => {
+              e.preventDefault();
+              claimBook(code);
+            }}
+          >
             <Form.Item
               label="Mã sách"
               labelCol={{ xs: { span: 2 }, sm: { span: 8 } }}
