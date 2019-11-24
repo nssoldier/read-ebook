@@ -22,6 +22,9 @@ const check = () => {
     .image-wrap {
       text-align: center;
     }
+    span{
+      user-select: none;
+    }
   `;
   iDoc.body.append(newStyle);
   return true;
