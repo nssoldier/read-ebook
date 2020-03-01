@@ -4,19 +4,43 @@ import { css } from "emotion";
 
 const styles = {
   container: css`
-    width: 400px;
-    @media screen and (max-width: 480px) {
+    width: 80vh;
+    border-radius: 10px;
+    height: 62vh;
+    @media screen and (max-width: 320px) {
       width: 300px;
+      height: 72vh;
+    }
+    @media screen and (max-width: 360px) and (min-width: 321px) {
+      width: 300px;
+      height: 66vh;
+    }
+    @media screen and (max-width: 375px) and (min-width: 361px) {
+      width: 300px;
+      height: 50vh;
+    }
+    @media screen and (max-width: 411px) and (min-width: 376px) {
+      width: 300px;
+      height: 55vh;
+    }
+    @media screen and (max-width: 420px) and (min-width: 412px) {
+      width: 300px;
+      height: 60vh;
+    }
+    @media screen and (max-width: 800px) and (min-width: 420px) {
+      width: 50vh;
+      height: 48vh;
+    }
+    @media screen and (max-width: 1025px) and (min-width: 800px) {
+      width: 50vh;
+      height: 40vh;
     }
     display: flex;
     margin: auto;
-    border: 1px solid #f0f0f0;
+    margin-top: 10vh;
     padding: 15px;
-    flex-wrap: wrap;
-    justify-content: center;
     align-content: center;
     background-color: #fcfcfc;
-    padding-top: 0px;
   `,
   background: css`
     background-image: linear-gradient(#48c6ef, #66a6ff);

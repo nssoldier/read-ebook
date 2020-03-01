@@ -1,24 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
 import { Button, Form, Icon, Input } from "antd";
-import { css, cx } from "emotion";
+import { css } from "emotion";
 import FormHeader from "./FormHeader";
-
-const propTypes = {
-  form: PropTypes.shape({}).isRequired,
-  onSubmit: PropTypes.func.isRequired,
-
-  formErrors: PropTypes.shape({}),
-  navigateToForgotPassword: PropTypes.func,
-  navigateToRegister: PropTypes.func
-};
-
-const defaultProps = {
-  formErrors: {},
-  navigateToForgotPassword: () => {},
-  navigateToRegister: () => {}
-};
+import { useHistory } from "react-router-dom";
 
 const styles = {
   icon: css`
@@ -47,17 +32,27 @@ const styles = {
   `
 };
 
-const LoginForm = ({
+const ForgotForm = ({
+  sendOTP,
   form: { getFieldDecorator, getFieldValue, setFields, validateFields },
-  formErrors,
-  navigateToForgotPassword,
-  onSubmit
+  formErrors = {}
 }) => {
+  const history = useHistory();
+
   const handleSubmit = e => {
     e.preventDefault();
-    validateFields((err, values) => {
+    validateFields(async (err, values) => {
       if (!err) {
-        onSubmit(values);
+        try {
+          const { email } = values;
+          await sendOTP(email);
+          await history.push({
+            pathname: "./resetpw",
+            state: { email: values.email }
+          });
+        } catch (error) {
+          alert("Không tìm thấy email của bạn. Vui lòng nhập lại email ");
+        }
       }
     });
   };
@@ -80,11 +75,33 @@ const LoginForm = ({
     }
   }, [formErrors, getFieldValue, setFields]);
 
+  const BottomButton = () => {
+    return (
+      <Form.Item>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end"
+          }}
+        >
+          <div>
+            <Button type="primary" htmlType="submit" style={{ marginRight: 5 }}>
+              Tìm Kiếm
+            </Button>
+            <Button type="ghost" href="./login">
+              Huỷ
+            </Button>
+          </div>
+        </div>
+      </Form.Item>
+    );
+  };
+
   return (
     <React.Fragment>
       <Form className={styles.loginForm} onSubmit={handleSubmit}>
-        <FormHeader isAuthen />
-        <Form.Item label="Email">
+        <FormHeader isForgot />
+        <Form.Item label="Vui lòng nhập email hoặc số điện thoại để tìm kiếm tài khoản">
           {getFieldDecorator("email", {
             rules: [{ required: true, message: "Thông tin bắt buộc" }]
           })(
@@ -95,36 +112,10 @@ const LoginForm = ({
             />
           )}
         </Form.Item>
-        <Form.Item label="Mật khẩu">
-          {getFieldDecorator("password", {
-            rules: [{ required: true, message: "Thông tin bắt buộc" }]
-          })(
-            <Input
-              prefix={<Icon type="lock" className={styles.icon} />}
-              type="password"
-              placeholder="Nhập mật khẩu"
-              className={styles.formField}
-            />
-          )}
-        </Form.Item>
-        <Button
-          style={{ marginTop: "2vh" }}
-          type="primary"
-          htmlType="submit"
-          className={cx(styles.loginFormButton, styles.formField)}
-        >
-          Đăng nhập
-        </Button>
-        <div className={styles.loginFormForgot}>
-          <a href="./forgotpw">Quên mật khẩu</a>
-        </div>
+        <BottomButton />
       </Form>
     </React.Fragment>
   );
 };
 
-LoginForm.propTypes = propTypes;
-
-LoginForm.defaultProps = defaultProps;
-
-export default Form.create({ name: "login-form" })(LoginForm);
+export default Form.create({ name: "forgot-form" })(ForgotForm);

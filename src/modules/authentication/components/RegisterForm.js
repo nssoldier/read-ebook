@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Button, Form, Icon, Input } from "antd";
 import { css, cx } from "emotion";
+import FormHeader from "./FormHeader";
 
 const propTypes = {
   form: PropTypes.shape({}).isRequired,
@@ -23,6 +24,7 @@ const styles = {
   `,
   regisForm: css`
     width: 100%;
+    height: 100%;
   `,
   regisFormButton: css`
     width: 100%;
@@ -36,7 +38,6 @@ const styles = {
   `,
   header: css`
     border-bottom: 1.5px solid #ebebeb;
-    height: 100px;
     margin-bottom: 15px;
     margin-top: 0px;
     display: flex;
@@ -94,15 +95,7 @@ const RegisterForm = ({
 
   return (
     <Form className={styles.regisForm} onSubmit={handleSubmit}>
-      <div className={styles.header}>
-        <h2
-          style={{
-            textAlign: "center"
-          }}
-        >
-          Đăng ký
-        </h2>
-      </div>
+      <FormHeader isAuthen />
       <Form.Item label="Email">
         {getFieldDecorator("email", {
           rules: [{ required: true, message: "Thông tin bắt buộc" }]
@@ -137,7 +130,7 @@ const RegisterForm = ({
           />
         )}
       </Form.Item>
-      <Form.Item label="Nhập lại mật khẩu">
+      <Form.Item style={{ marginBottom: 0 }} label="Nhập lại mật khẩu">
         {getFieldDecorator("rePassword", {
           rules: [{ required: true, message: "Thông tin bắt buộc" }]
         })(
@@ -157,21 +150,13 @@ const RegisterForm = ({
           Mật khẩu không trùng khớp.
         </div>
       </Form.Item>
-      <Form.Item className={styles.loginFormFooter}>
-        <Button
-          type="primary"
-          htmlType="submit"
-          className={cx(styles.regisFormButton, styles.formField)}
-        >
-          Đăng ký
-        </Button>
-        <Button
-          className={cx(styles.cancelButton, styles.formField)}
-          type="link"
-        >
-          <a onClick={() => navigateToLogin()}>Đăng nhập</a>
-        </Button>
-      </Form.Item>
+      <Button
+        type="primary"
+        htmlType="submit"
+        className={cx(styles.regisFormButton, styles.formField)}
+      >
+        Đăng ký
+      </Button>
     </Form>
   );
 };

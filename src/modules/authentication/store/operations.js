@@ -28,7 +28,7 @@ const {
   }
 } = slice;
 
-const ignorePaths = ["/login", "/register"];
+const ignorePaths = ["/login", "/register", "/forgotpw", "/resetpw"];
 
 const publicPaths = [
   // {

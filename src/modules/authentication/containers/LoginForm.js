@@ -1,24 +1,23 @@
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import {connect} from "react-redux";
+import {withRouter} from "react-router-dom";
 
-import { actions } from "../store";
+import {actions} from "../store";
 import LoginForm from "../components/LoginForm";
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   formErrors: state.authentication.loginErrors
 });
 
-const mapDispatchToProps = (dispatch, { history }) => ({
-  navigateToForgotPassword: () => {},
+const mapDispatchToProps = (dispatch, {history}) => ({
+  navigateToForgotPassword: () => {
+    history.push("/forgotpw");
+  },
   navigateToRegister: () => {
     history.push("/register");
   },
-  onSubmit: async values => dispatch(actions.login({ history, values }))
+  onSubmit: async (values) => dispatch(actions.login({history, values}))
 });
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(LoginForm)
+  connect(mapStateToProps, mapDispatchToProps)(LoginForm)
 );

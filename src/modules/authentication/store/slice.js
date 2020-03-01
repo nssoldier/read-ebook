@@ -1,4 +1,4 @@
-import { createSlice } from "redux-starter-kit";
+import {createSlice} from "redux-starter-kit";
 
 const initialState = {
   authenticated: false,
@@ -14,54 +14,54 @@ const authentication = createSlice({
   name: "authentication",
   initialState,
   reducers: {
-    checkTokenStart: state => ({
+    checkTokenStart: (state) => ({
       ...state
     }),
-    checkTokenSuccess: state => ({
+    checkTokenSuccess: (state) => ({
       ...state,
       authenticated: true
     }),
-    checkTokenFail: state => ({
+    checkTokenFail: (state) => ({
       ...state,
       authenticated: false
     }),
-    loginStart: state => ({
+    loginStart: (state) => ({
       ...state,
       authenticating: true,
       loginErrors: undefined
     }),
-    loginSuccess: state => ({
+    loginSuccess: (state) => ({
       ...state,
       authenticated: true,
       authenticating: false,
       loginErrors: undefined
     }),
-    loginFail: (state, { payload }) => ({
+    loginFail: (state, {payload}) => ({
       ...state,
       authenticating: false,
-      loginErrors: { email: payload.message, password: payload.message }
+      loginErrors: {email: payload.message, password: payload.message}
     }),
-    logoutStart: state => ({
+    logoutStart: (state) => ({
       ...state
     }),
-    logoutSuccess: state => ({
+    logoutSuccess: (state) => ({
       ...state,
       authenticated: false
     }),
-    logoutFail: state => ({
+    logoutFail: (state) => ({
       ...state
     }),
-    registerStart: state => ({
+    registerStart: (state) => ({
       ...state,
       registering: true,
       registerErrors: undefined
     }),
-    registerSuccess: state => ({
+    registerSuccess: (state) => ({
       ...state,
       registering: false,
       registerErrors: undefined
     }),
-    registerFail: (state, { payload }) => ({
+    registerFail: (state, {payload}) => ({
       ...state,
       registering: false,
       registerErrors: {
@@ -70,24 +70,24 @@ const authentication = createSlice({
         username: payload.message
       }
     }),
-    getCurrentUserStart: state => ({
+    getCurrentUserStart: (state) => ({
       ...state
     }),
-    getCurrentUserSuccess: (state, { payload }) => ({
+    getCurrentUserSuccess: (state, {payload}) => ({
       ...state,
       currentUser: payload.result
     }),
-    getCurrentUserFail: state => ({
+    getCurrentUserFail: (state) => ({
       ...state
     }),
-    updateInformationStart: state => ({
+    updateInformationStart: (state) => ({
       ...state
     }),
-    updateInformationSuccess: (state, { payload }) => ({
+    updateInformationSuccess: (state, {payload}) => ({
       ...state,
       currentUser: payload.result
     }),
-    updateInformationFail: state => ({
+    updateInformationFail: (state) => ({
       ...state
     })
   }

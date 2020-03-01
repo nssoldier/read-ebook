@@ -103,7 +103,7 @@ const Header = ({ authenticated, logout }) => {
               to="/login"
               type="link"
             >
-              Logout
+              Đăng xuất
             </Link>
           </>
         ) : (
@@ -114,7 +114,7 @@ const Header = ({ authenticated, logout }) => {
               to="/login"
               type="link"
             >
-              Login
+              Đăng nhập
             </Link>
             <span style={{ color: "#fff", padding: "10px" }}>or</span>
             <Link
@@ -123,7 +123,7 @@ const Header = ({ authenticated, logout }) => {
               to="/register"
               type="link"
             >
-              Register
+              Đăng ký
             </Link>
           </div>
         )}
