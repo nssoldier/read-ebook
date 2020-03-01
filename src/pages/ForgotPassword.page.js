@@ -4,7 +4,10 @@ import ForgotForm from "../modules/authentication/containers/ForgotForm";
 
 const styles = {
   container: css`
-    width: 80vw;
+    width: 80vh;
+    @media screen and (max-width: 1025px) {
+      width: 80vw;
+    }
     border-radius: 10px;
     display: flex;
     margin: auto;

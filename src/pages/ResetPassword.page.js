@@ -4,7 +4,7 @@ import ResetForm from "../modules/authentication/containers/ResetForm";
 
 const styles = {
   container: css`
-    width: 80vw;
+    width: 80vh;
     border-radius: 10px;
     display: flex;
     margin: auto;
@@ -15,6 +15,9 @@ const styles = {
     padding: 15px;
     align-content: center;
     background-color: #fcfcfc;
+    @media screen and (max-width: 1025px) {
+      width: 80vw;
+    }
   `,
   background: css`
     background-image: linear-gradient(#48c6ef, #66a6ff);
