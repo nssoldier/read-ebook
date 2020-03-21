@@ -18,12 +18,17 @@ const check = () => {
   style.remove();
   window.iDoc = iDoc;
   const newStyle = iDoc.createElement("style");
+  const height = window.innerHeight * 0.8;
+  const width = window.innerWidth * 0.88;
   newStyle.innerHTML = `
     .image-wrap {
       text-align: center;
     }
     span{
       user-select: none;
+    }
+    body > div > img {
+        ${width > 768 ? `height: ${height}px;` : `width: ${width}px;`}
     }
   `;
   iDoc.body.append(newStyle);

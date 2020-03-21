@@ -158,8 +158,7 @@ const ResetForm = ({
             rules: {
               required: passwordRequire,
               message: "Mật khẩu mới không chính xác .vui lòng nhập lại"
-            },
-            rules: [{ required: true, message: "Thông tin bắt buộc" }]
+            }
           })(<Input placeholder="Nhập mã OTP" className={styles.formField} />)}
         </Form.Item>
         <BottomButton />

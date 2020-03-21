@@ -4,7 +4,7 @@ import gql from "graphql-tag";
 import React, { useCallback } from "react";
 import { sendOTP } from "./ForgotForm";
 
-export default ({}) => {
+export default () => {
   const resetPassword = useCallback(async payload => {
     const { email, otp, newPassword } = payload;
     const mutation = gql`

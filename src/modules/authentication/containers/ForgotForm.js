@@ -19,6 +19,6 @@ export const sendOTP = async email => {
   return result;
 };
 
-export default ({}) => {
+export default () => {
   return <ForgotForm sendOTP={sendOTP} />;
 };
